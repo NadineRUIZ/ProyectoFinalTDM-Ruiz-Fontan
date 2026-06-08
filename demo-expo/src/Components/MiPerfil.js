@@ -73,7 +73,8 @@ function MiPerfil() {
 
 
     return (
-        <View style={style.container}>
+        <View
+        style={style.container}>
             <Text style={style.perfil}> Mi Perfil</Text>
             <Text style={style.datos}>
                 {dataUsuario == [] ? <Text>Cargando</Text> : <View><Text> {dataUsuario[0].data.user} </Text></View>}

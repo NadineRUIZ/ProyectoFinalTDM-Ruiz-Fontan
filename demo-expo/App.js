@@ -1,20 +1,23 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import Register from './src/Components/Register';
+import Login from './src/Components/Login';
+import HomeMenu from './src/Components/HomeMenu';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+
+function App(){
+  return(
+    <NavigationContainer>
+      <Stack.Navigator>
+
+        <Stack.Screen name="Register" component={ Register} />
+        <Stack.Screen name="Login" component={ Login } /> 
+        <Stack.Screen name="HomeMenu" component ={HomeMenu} /> 
+
+      </Stack.Navigator>
+    </NavigationContainer>
+
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
