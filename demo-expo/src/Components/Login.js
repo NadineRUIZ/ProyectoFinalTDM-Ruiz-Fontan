@@ -27,7 +27,7 @@ function login(email, password){
 }
 
 
-function Login(props){
+export default function Login(props){
 
     return(
         <View style= {styles.container}>
