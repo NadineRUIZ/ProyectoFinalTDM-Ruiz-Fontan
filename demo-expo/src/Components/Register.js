@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 
 function Register() {
     const [registro, setRegistro] = useState("")

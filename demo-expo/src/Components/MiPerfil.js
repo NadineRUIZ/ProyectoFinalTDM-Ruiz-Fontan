@@ -1,4 +1,9 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react"
+import { db, auth } from "../firebase/config";
+import { Text, View, Pressable } from 'react-native';
+
+
+
 
 
 function MiPerfil() {
@@ -6,44 +11,45 @@ function MiPerfil() {
     const [dataUsuario, setDataUsuario] = useState("")
     const [posteos, setPosteos] = useState("")
 
-    function logout(){
+    function logout() {
 
         auth.singout()
     }
 
     useEffect(() => {
         db.collection('posts')
-        .where('owner', '==', 'auth.currentUser.email')
-        .onSnapshot(
-            docs => {
-                let posts = [];
-                docs.forEach( doc => {
-                    //Traer las descripciones obtenidas en el archivo de crear posteo
-                    
+            .where('owner', '==', 'auth.currentUser.email')
+            .onSnapshot(
+                docs => {
+                    let posts = [];
+                    docs.forEach(doc => {
 
-                    posts.push({
-                        id: doc.id,
-                        data: doc.data()
+                        if (doc.data().descripcion !== "") {
+                            posts.push({
+                                id: doc.id,
+                                data: doc.data()
+                            })
+
+                        }
+
+                        setPosteos(posts)
                     })
 
-                    setPosteos(posts)
-                })
 
-
-            }
-        )
+                }
+            )
 
 
     })
-  
+
     useEffect(() => {
         auth.onAuthStateChanged(user => {
-        
+
             if (user == "")
-            return;
-            
+                return;
+
             else (
-            
+
                 db.collection('users')
                     .where("owner", "==", (auth.currentUser.email))
                     .onSnapshot(
@@ -62,7 +68,7 @@ function MiPerfil() {
                     )
             )
 
-    })
+        })
     })
 
 
@@ -71,7 +77,18 @@ function MiPerfil() {
             <Text style={style.perfil}> Mi Perfil</Text>
             <Text style={style.datos}>
                 {dataUsuario == [] ? <Text>Cargando</Text> : <View><Text> {dataUsuario[0].data.user} </Text></View>}
-                  </Text>
+            </Text>
+
+            <Text>Mis posteos</Text>
+            {posteos == "" ? <Text>No hay posteos</Text> : 
+            <FlatList
+                data={posteos}
+                keyExtractor = { post => post.id.toString()}
+                renderItem = { ({item}) => <Text>{item.descripcion}</Text>}
+
+                />
+            }
+
         </View>
 
     )
