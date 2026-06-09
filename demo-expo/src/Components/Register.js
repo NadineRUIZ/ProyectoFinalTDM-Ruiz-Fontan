@@ -1,41 +1,47 @@
 import React from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { TextInput, View } from "react-native";
+import { Pressable } from "react-native";
+import { Text } from "react-native";
+import { StyleSheet } from "react-native";
+import { auth, db } from "../firebase/config";
 
-function Register() {
+
+function Register(props) {
     const [registro, setRegistro] = useState("")
     const [usuario, setUsuario] = useState("")
-    const [email, setEMail] = useState("")
+    const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [registroError, setRegistroError] = useState("")
 
-    function onSubmit() {
+   function onSubmit() {
 
-        if (usuario === "" || email === "" || password === "") {
-            setRegistroError("Error: debe completar todos los campos")
-            return
-        }
+    if (usuario === "" || email === "" || password === "") {
+        setRegistroError("Error: debe completar todos los campos")
+        return
+    }
 
-        auth.createUserWithEmailAndPassword(email, password)
-            .then(response => {
+    auth.createUserWithEmailAndPassword(email, password)
+        .then((response) => {
+
+            db.collection('users').add({
+                usuario: usuario,
+                email: email,
+                password: password,
+                createdAt: Date.now()
+            })
+            .then(() => {
                 setRegistro(true)
                 props.navigation.navigate('Login')
             })
-
-            .catch(error => {
-                setRegistroError('Fallo en el registro')
+            .catch((e) => {
+                console.log(e)
+                setRegistroError('Error al guardar usuario')
             })
 
-
-        db.collection('users').add({
-            usuario: usuario,
-            email: auth.currentUser.email,
-            password: auth.currentUser.password,
-            createdAt: Date.now()
         })
-            .then()
-            .catch(e => console.log(e))
 
-    }
+}
 
     function irALogin(){
         props.navigation.navigate('Login')
@@ -76,6 +82,13 @@ function Register() {
             </Text>
             </Pressable>
 
+            <Pressable onPress={ () => props.navigation.navigate('Home')} >
+                <Text>
+                Ir a home
+           
+            </Text>
+
+            </Pressable>
         </View>
 
     )

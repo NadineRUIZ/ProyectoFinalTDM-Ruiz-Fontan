@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Pressable, Text, TextInput, StyleSheet, View } from "react-native";
-import {db, auth} from "ruta/a/firebase/config"; 
 
-function login(email, password){
+import NavegacionTab from "./NavegacionTab";
+import { auth } from "../firebase/config";
+
+
+function Login(){
     const [usuario, setUsuario] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -16,6 +19,7 @@ function login(email, password){
             auth.signInwithEmailAndPassword(email, password)
             .then((response) => {
                 setLogin(true);
+                props.navigation.navigate("NavegacionTab")
             })
             .catch(error => {
                 setLoginError("credenciales Invalidas")
@@ -23,10 +27,8 @@ function login(email, password){
         }
     }
    
-}
 
 
-export default function Login(props){
 
     return(
         <View style= {styles.container}>
@@ -55,6 +57,8 @@ export default function Login(props){
         </View>
     )
 }
+
+
 
 const styles = StyleSheet.create({
     container: {

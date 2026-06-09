@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { db, auth } from "../firebase/config";
-import { Text, View, Pressable } from 'react-native';
+import { StyleSheet } from "react-native";
 
 
 
@@ -89,6 +89,7 @@ function MiPerfil() {
 
                 />
             }
+           
 
         </View>
 
