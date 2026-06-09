@@ -19,7 +19,7 @@ function Login(){
             auth.signInwithEmailAndPassword(email, password)
             .then((response) => {
                 setLogin(true);
-                props.navigation.navigate("NavegacionTab")
+                props.navigation.navigate("Home");
             })
             .catch(error => {
                 setLoginError("credenciales Invalidas")
