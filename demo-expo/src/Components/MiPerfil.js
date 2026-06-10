@@ -1,8 +1,8 @@
 import { useEffect } from "react"
 import { db, auth } from "../firebase/config";
 import { StyleSheet } from "react-native";
-
-
+import { useState } from "react";
+import { View, Text, Pressable } from "react-native-web";
 
 
 
@@ -85,7 +85,7 @@ function MiPerfil() {
             <FlatList
                 data={posteos}
                 keyExtractor = { post => post.id.toString()}
-                renderItem = { ({item}) => <Text>{item.descripcion}</Text>}
+                renderItem = { ({item}) => <Text>{item.descripcion}</Text>} //chequear .descripcion de NewPost
 
                 />
             }

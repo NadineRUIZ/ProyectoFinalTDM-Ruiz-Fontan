@@ -5,7 +5,7 @@ import NavegacionTab from "./NavegacionTab";
 import { auth } from "../firebase/config";
 
 
-function Login(){
+function Login(props){
     const [usuario, setUsuario] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -26,6 +26,7 @@ function Login(){
             });
         }
     }
+    
    
 
 
