@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
+import {  Pressable, Text, TextInput, StyleSheet, View} from "react-native";
 
 function Register() {
     const [registro, setRegistro] = useState("")
     const [usuario, setUsuario] = useState("")
-    const [email, setEMail] = useState("")
+    const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [registroError, setRegistroError] = useState("")
 
@@ -57,9 +58,9 @@ function Register() {
                 value={email}
             />
             <TextInput style={style.texto}
-                keyboardType='phone-pad'
-                placeholder='Contraseña'
-                securteTextEntry={true}
+                keyboardType='password'
+                placeholder='password'
+                securityTextEntry={true}
                 onChangeText={text => setPassword(text)}
                 value={password}
             />

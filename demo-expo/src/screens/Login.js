@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Pressable, Text, TextInput, StyleSheet, View } from "react-native";
-import {db, auth} from "ruta/a/firebase/config"; 
+import {db, auth} from "../firebase/config"; 
 
-function login(email, password){
+function Login(props){
     const [usuario, setUsuario] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -24,10 +24,9 @@ function login(email, password){
         }
     }
    
-}
 
 
-function Login(props){
+
 
     return(
         <View style= {styles.container}>
