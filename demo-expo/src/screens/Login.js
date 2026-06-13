@@ -3,23 +3,25 @@ import { Pressable, Text, TextInput, StyleSheet, View } from "react-native";
 import {db, auth} from "../firebase/config"; 
 
 function Login(props){
-    const [usuario, setUsuario] = useState("")
+
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const[login, setLogin] = useState("")
-    const [error, setLoginError] = useState("")
+    const[login, setLogin] = useState(false)
+    const [errorLogin, setLoginError] = useState("")
 
     function onSubmit(){
         if (email === "" || password === "") {
             setLoginError("completar los campos");
+            return;
         } else{
-            auth.signInwithEmailAndPassword(email, password)
+            auth.signInWithEmailAndPassword(email, password)
             .then((response) => {
                 setLogin(true);
                 props.navigation.navigate("Home");
             })
             .catch(error => {
                 setLoginError("credenciales Invalidas")
+        
             });
         }
     }
@@ -47,7 +49,7 @@ function Login(props){
             <Pressable onPress = {() => onSubmit()}>
                 <Text> Login </Text>
             </Pressable>
-         
+         {errorLogin !== "" && <Text style={styles.error}>{(errorLogin)}</Text>}
          <Text style={styles.title}> No tenes cuenta? Registrate: </Text>
            <Pressable onPress={() => props.navigation.navigate("Register")}>
                <Text style={styles.buttonText}> ir a registro </Text>
@@ -70,6 +72,9 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: "red",
     },
+    error: {
+        color:"red",
+    }
 });
 
 export default Login;

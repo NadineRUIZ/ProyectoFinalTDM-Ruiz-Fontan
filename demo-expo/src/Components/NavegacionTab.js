@@ -1,8 +1,8 @@
 import React from "react";
 import { View } from "react-native-web";
-import Homepage from "../Screens/Homepage";
-import NewPost from "../Screens/NewPost";
-import MiPerfil from "../Screens/MiPerfil";
+import Homepage from "../screens/Homepage";
+import NewPost from "../screens/NewPost";
+import MiPerfil from "../screens/MiPerfil";
 
 function NavegacionTab(){
     return(
