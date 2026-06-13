@@ -19,15 +19,15 @@ function MiPerfil(props) {
 
 
     useEffect(() => {
-        db.collection('posts')
+        db.collection('post')
             .where('email', '==', 'auth.currentUser.email')
             .onSnapshot(
                 docs => {
-                    let posts = [];
+                    let post = [];
                     docs.forEach(doc => {
 
-                        if (doc.data().descripcion !== "") {
-                            posts.push({
+                        if (doc.data().description !== "") {
+                            post.push({
                                 id: doc.id,
                                 data: doc.data()
                             })
@@ -91,7 +91,7 @@ function MiPerfil(props) {
              <FlatList
                     data={posteos}
                     keyExtractor={post => post.id.toString()}
-                    renderItem={({ item }) => <Text>{item.descripcion}</Text>} //chequear .descripcion de NewPost
+                    renderItem={({ item }) => <Text>{item.description}</Text>} //chequear .descripcion de NewPost
 
                 />
             }
