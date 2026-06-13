@@ -27,7 +27,6 @@ function Register(props) {
                 db.collection('users').add({
                     usuario: usuario,
                     email: email,
-                    password: password,
                     createdAt: Date.now()
                 })
                     .then(() => {
@@ -63,9 +62,9 @@ function Register(props) {
                 value={email}
             />
             <TextInput style={style.texto}
-                keyboardType='password'
+                keyboardType='phone-pad'
                 placeholder='password'
-                securityTextEntry={true}
+                secureTextEntry={true}
                 onChangeText={text => setPassword(text)}
                 value={password}
             />

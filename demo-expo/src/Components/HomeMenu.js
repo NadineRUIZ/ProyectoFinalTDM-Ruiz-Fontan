@@ -2,13 +2,21 @@ import React from "react";
 import Homepage from "../screens/Homepage";
 import MiPerfil from "../screens/MiPerfil";
 import NewPost from "../screens/NewPost";
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { MaterialIcons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+
+
+const Tab = createBottomTabNavigator();
 
 function HomeMenu(){
     return(
         <Tab.Navigator>
-            <Tab.Screen name="Homepage" component={Homepage} />
-            <Tab.Screen name="NewPost" component={NewPost}/>
-            <Tab.Screen name="MiPerfil" component={MiPerfil}/>
+            <Tab.Screen name="Homepage" component={Homepage} options= {{tabBarIcon: () => <MaterialIcons name="home" size={24} color="black" />}} />
+            <Tab.Screen name="NewPost" component={NewPost} options={{tabBarIcon: () => <AntDesign name="plus-circle" size={24} color="black"/> }}/>
+            <Tab.Screen name="MiPerfil" component={MiPerfil} options={{tabBarIcon: () => <MaterialCommunityIcons name="human-female-dance" size={24} color="black" />}}/>
         </Tab.Navigator>
     )
 }

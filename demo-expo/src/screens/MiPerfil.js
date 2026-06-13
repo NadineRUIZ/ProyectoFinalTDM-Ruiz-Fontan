@@ -6,7 +6,7 @@ import { View, Text, Pressable } from "react-native-web";
 
 
 
-function MiPerfil() {
+function MiPerfil(props) {
 
     const [dataUsuario, setDataUsuario] = useState("")
     const [posteos, setPosteos] = useState("")
@@ -14,11 +14,13 @@ function MiPerfil() {
     function logout() {
 
         auth.singout()
+        props.navigation.navigate("Login")
     }
+
 
     useEffect(() => {
         db.collection('posts')
-            .where('owner', '==', 'auth.currentUser.email')
+            .where('email', '==', 'auth.currentUser.email')
             .onSnapshot(
                 docs => {
                     let posts = [];
@@ -31,6 +33,7 @@ function MiPerfil() {
                             })
 
                         }
+
 
                         setPosteos(posts)
                     })
@@ -51,7 +54,7 @@ function MiPerfil() {
             else (
 
                 db.collection('users')
-                    .where("owner", "==", (auth.currentUser.email))
+                    .where("email", "==", (auth.currentUser.email))
                     .onSnapshot(
                         docs => {
                             let users = [];
@@ -74,22 +77,25 @@ function MiPerfil() {
 
     return (
         <View
-        style={style.container}>
-            <Text style={style.perfil}> Mi Perfil</Text>
+            style={style.container}>
             <Text style={style.datos}>
-                {dataUsuario == [] ? <Text>Cargando</Text> : <View><Text> {dataUsuario[0].data.user} </Text></View>}
+                {dataUsuario.length === 0 ? "Cargando" : `Usuario: ${dataUsuario[0]?.data?.usuario}`}
             </Text>
 
+            <Text style={style.datos}>
+                {dataUsuario.length === 0 ? "" : `Email: ${dataUsuario[0]?.data?.email}`}
+            </Text>
             <Text>Mis posteos</Text>
-            {posteos == "" ? <Text>No hay posteos</Text> : 
-            <FlatList
-                data={posteos}
-                keyExtractor = { post => post.id.toString()}
-                renderItem = { ({item}) => <Text>{item.descripcion}</Text>} //chequear .descripcion de NewPost
+            {posteos == "" ? <Text>No hay posteos</Text> :
+             
+             <FlatList
+                    data={posteos}
+                    keyExtractor={post => post.id.toString()}
+                    renderItem={({ item }) => <Text>{item.descripcion}</Text>} //chequear .descripcion de NewPost
 
                 />
             }
-           
+
 
         </View>
 
