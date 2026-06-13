@@ -1,7 +1,7 @@
 import React from "react";
-import Homepage from "../Screens/Homepage";
-import MiPerfil from "../Screens/MiPerfil";
-import NewPost from "../Screens/NewPost";
+import Homepage from "../screens/Homepage";
+import MiPerfil from "../screens/MiPerfil";
+import NewPost from "../screens/NewPost";
 
 function HomeMenu(){
     return(

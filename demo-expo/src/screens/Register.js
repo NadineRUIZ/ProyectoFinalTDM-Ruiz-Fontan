@@ -14,42 +14,42 @@ function Register(props) {
     const [password, setPassword] = useState("")
     const [registroError, setRegistroError] = useState("")
 
-   function onSubmit() {
+    function onSubmit() {
 
-    if (usuario === "" || email === "" || password === "") {
-        setRegistroError("Error: debe completar todos los campos")
-        return
+        if (usuario === "" || email === "" || password === "") {
+            setRegistroError("Error: debe completar todos los campos")
+            return
+        }
+
+        auth.createUserWithEmailAndPassword(email, password)
+            .then((response) => {
+
+                db.collection('users').add({
+                    usuario: usuario,
+                    email: email,
+                    password: password,
+                    createdAt: Date.now()
+                })
+                    .then(() => {
+                        setRegistro(true)
+                        props.navigation.navigate('Login')
+                    })
+                    .catch((e) => {
+                        console.log(e)
+                        setRegistroError('Error al guardar usuario')
+                    })
+
+            })
+
     }
 
-    auth.createUserWithEmailAndPassword(email, password)
-        .then((response) => {
-
-            db.collection('users').add({
-                usuario: usuario,
-                email: email,
-                password: password,
-                createdAt: Date.now()
-            })
-            .then(() => {
-                setRegistro(true)
-                props.navigation.navigate('Login')
-            })
-            .catch((e) => {
-                console.log(e)
-                setRegistroError('Error al guardar usuario')
-            })
-
-        })
-
-}
-
-    function irALogin(){
+    function irALogin() {
         props.navigation.navigate('Login')
     }
 
     return (
         <View style={style.container}>
-            <Text> Registro</Text>
+            <Text style ={style.registro}> Registro</Text>
             <TextInput style={style.texto}
                 keyboardType='phone-pad'
                 placeholder='Usuario'
@@ -76,27 +76,27 @@ function Register(props) {
 
             {registroError !== "" ? <Text style={style.errorRegistro}>{registroError}</Text> : null}
 
-            <Pressable style={style.irALogin} onPress={irALogin}>
-            <Text>
-                Ir a Login
-            </Text>
+            <Pressable  onPress={irALogin}>
+                <Text style={style.irALogin} >
+                    Ir a Login
+                </Text>
             </Pressable>
 
-            <Pressable onPress={ () => props.navigation.navigate('Homepage')} >
+            <Pressable onPress={() => props.navigation.navigate('Homepage')} >
                 <Text>
-                Ir a home page 
-           
-            </Text>
+                    Ir a home page
+
+                </Text>
             </Pressable>
 
-            <Pressable onPress={ () => props.navigation.navigate('HomeMenu')} >
+            <Pressable onPress={() => props.navigation.navigate('HomeMenu')} >
                 <Text>
-                Ir a home menu
-           
-            </Text>
+                    Ir a home menu
+
+                </Text>
 
             </Pressable>
-        
+
         </View>
 
     )
@@ -105,8 +105,7 @@ function Register(props) {
 
 const style = StyleSheet.create({
     container: {
-        padding: 10,
-        margin: 20
+        margin: 200
     },
 
     texto: {
@@ -121,25 +120,44 @@ const style = StyleSheet.create({
     },
 
     boton: {
-        backgroundColor: '#28a745',
+        backgroundColor: '#5f0082',
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: 'center',
         borderRadius: 4,
         borderWidth: 1,
         borderStyle: 'solid',
-        borderColor: '#28a745',
+        borderColor: '#8d56c2fc',
     },
 
     textoBoton: {
         color: '#fff',
+        textAlign: "center",
     },
 
     errorRegistro: {
         color: 'red',
         fontSize: 12,
         marginTop: 5,
-    }
+    },
+
+    irALogin: {
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 12,
+    textDecorationLine: "underline",
+    marginTop: 20,
+},
+
+registro: {
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 30,
+    marginBottom: 20,
+
+
+
+}
 
 })
 

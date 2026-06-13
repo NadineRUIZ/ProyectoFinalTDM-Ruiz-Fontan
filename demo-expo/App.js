@@ -1,9 +1,9 @@
 import { NavigationContainer } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Register from './src/Screens/Register';
-import Login from './src/Components/Login';
-import Homepage from './src/Screens/Homepage';
-import HomeMenu from './src/Components/HomeMenu';
+import Register from './src/screens/Register';
+import Login from './src/screens/Login';
+import Homepage from './src/screens/Homepage';
+import HomeMenu from './src/components/HomeMenu';
 
 
 
@@ -25,5 +25,8 @@ function App(){
 
   )
 }
+
+
+
 
 export default App;
