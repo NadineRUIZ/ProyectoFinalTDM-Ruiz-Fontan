@@ -2,25 +2,27 @@ import React, { useState } from "react";
 import { Pressable, Text, TextInput, StyleSheet, View } from "react-native";
 import { db, auth } from "../firebase/config";
 
-function Login(props) {
-    const [usuario, setUsuario] = useState("")
+function Login(props){
+
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [login, setLogin] = useState("")
-    const [error, setLoginError] = useState("")
+    const[login, setLogin] = useState(false)
+    const [errorLogin, setLoginError] = useState("")
 
     function onSubmit() {
         if (email === "" || password === "") {
             setLoginError("completar los campos");
-        } else {
-            auth.signInwithEmailAndPassword(email, password)
-                .then((response) => {
-                    setLogin(true);
-                    props.navigation.navigate("Home");
-                })
-                .catch(error => {
-                    setLoginError("credenciales Invalidas")
-                });
+            return;
+        } else{
+            auth.signInWithEmailAndPassword(email, password)
+            .then((response) => {
+                setLogin(true);
+                props.navigation.navigate("Home");
+            })
+            .catch(error => {
+                setLoginError("credenciales Invalidas")
+        
+            });
         }
     }
 
@@ -47,13 +49,11 @@ function Login(props) {
             <Pressable style={style.boton} onPress={() => onSubmit()}>
                 <Text style={style.textoBoton}> Login </Text>
             </Pressable>
-
-            <Text style={style.irARegistro}> No tenes cuenta?
-                <Pressable onPress={() => props.navigation.navigate("Register")}>
-                    <Text style={style.irARegistro}> Registrate </Text>
-                </Pressable>
-            </Text>
-
+         {errorLogin !== "" && <Text style={style.error}>{(errorLogin)}</Text>}
+         <Text style={style.title}> No tenes cuenta? Registrate: </Text>
+           <Pressable onPress={() => props.navigation.navigate("Register")}>
+               <Text style={style.buttonText}> ir a registro </Text>
+           </Pressable>
         </View>
     )
 }
