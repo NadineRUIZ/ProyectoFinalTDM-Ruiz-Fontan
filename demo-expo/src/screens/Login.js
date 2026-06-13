@@ -49,7 +49,7 @@ function Login(props){
             <Pressable onPress = {() => onSubmit()}>
                 <Text> Login </Text>
             </Pressable>
-         {errorLogin !== "" && <Text style={styles.error}>{(errorLogin)}</Text>}
+         {errorLogin !== "" && <Text style={style.error}>{(errorLogin)}</Text>}
          <Text style={styles.title}> No tenes cuenta? Registrate: </Text>
            <Pressable onPress={() => props.navigation.navigate("Register")}>
                <Text style={styles.buttonText}> ir a registro </Text>
