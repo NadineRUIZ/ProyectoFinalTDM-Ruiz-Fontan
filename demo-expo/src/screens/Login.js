@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Pressable, Text, TextInput, StyleSheet, View } from "react-native";
-import { db, auth } from "../firebase/config";
+import {db, auth} from "../firebase/config"; 
 
 function Login(props){
 
@@ -9,7 +9,7 @@ function Login(props){
     const[login, setLogin] = useState(false)
     const [errorLogin, setLoginError] = useState("")
 
-    function onSubmit() {
+    function onSubmit(){
         if (email === "" || password === "") {
             setLoginError("completar los campos");
             return;
@@ -17,7 +17,7 @@ function Login(props){
             auth.signInWithEmailAndPassword(email, password)
             .then((response) => {
                 setLogin(true);
-                props.navigation.navigate("Home");
+                props.navigation.navigate("Homepage");
             })
             .catch(error => {
                 setLoginError("credenciales Invalidas")
@@ -25,7 +25,7 @@ function Login(props){
             });
         }
     }
-
+   
 
 
 
@@ -52,7 +52,7 @@ function Login(props){
          {errorLogin !== "" && <Text style={style.error}>{(errorLogin)}</Text>}
          <Text style={style.title}> No tenes cuenta? Registrate: </Text>
            <Pressable onPress={() => props.navigation.navigate("Register")}>
-               <Text style={style.buttonText}> ir a registro </Text>
+               <Text style={style.irARegistro}> ir a registro </Text>
            </Pressable>
         </View>
     )
@@ -110,10 +110,9 @@ const style = StyleSheet.create({
         textDecorationLine: "underline",
         marginTop: 20,
 
-    },
-
-    textoBotonRegistro: {
     }
+
+ 
 
 });
 
