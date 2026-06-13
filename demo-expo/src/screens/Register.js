@@ -82,13 +82,21 @@ function Register(props) {
             </Text>
             </Pressable>
 
-            <Pressable onPress={ () => props.navigation.navigate('Home')} >
+            <Pressable onPress={ () => props.navigation.navigate('Homepage')} >
                 <Text>
-                Ir a home
+                Ir a home page 
+           
+            </Text>
+            </Pressable>
+
+            <Pressable onPress={ () => props.navigation.navigate('HomeMenu')} >
+                <Text>
+                Ir a home menu
            
             </Text>
 
             </Pressable>
+        
         </View>
 
     )
