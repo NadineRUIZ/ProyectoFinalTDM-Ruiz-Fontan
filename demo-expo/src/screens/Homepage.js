@@ -25,7 +25,7 @@ useEffect (() => {
 
     return(
     <View style = {style.container}>
-        <Text style= {Styles.title}> Home </Text>
+        <Text style= {style.title}> Home </Text>
     </View>
     )
     }

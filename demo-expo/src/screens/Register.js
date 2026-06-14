@@ -12,18 +12,18 @@ function Register(props) {
     const [usuario, setUsuario] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [registroError, setRegistroError] = useState("")
+    const [errorFirebase, setErrorFirebase] = useState("")
+  
 
     function onSubmit() {
 
         if (usuario === "" || email === "" || password === "") {
-            setRegistroError("Error: debe completar todos los campos")
+            setErrorFirebase("Error: debe completar todos los campos")
             return
         }
 
         auth.createUserWithEmailAndPassword(email, password)
             .then((response) => {
-
                 db.collection('users').add({
                     usuario: usuario,
                     email: email,
@@ -33,72 +33,67 @@ function Register(props) {
                         setRegistro(true)
                         props.navigation.navigate('Login')
                     })
-                    .catch((e) => {
-                        console.log(e)
-                        setRegistroError('Error al guardar usuario')
-                    })
-
+            })
+            .catch((error) => {
+                setErrorFirebase(error.message)
             })
 
-    }
+   
 
-    function irALogin() {
-        props.navigation.navigate('Login')
-    }
+}
 
-    return (
-        <View style={style.container}>
-            <Text style ={style.registro}> Registro</Text>
-            <TextInput style={style.texto}
-                keyboardType='phone-pad'
-                placeholder='Usuario'
-                onChangeText={text => setUsuario(text)}
-                value={usuario}
-            />
-            <TextInput style={style.texto}
-                keyboardType='email-adress'
-                placeholder='Email'
-                onChangeText={text => setEmail(text)}
-                value={email}
-            />
-            <TextInput style={style.texto}
-                keyboardType='phone-pad'
-                placeholder='password'
-                secureTextEntry={true}
-                onChangeText={text => setPassword(text)}
-                value={password}
-            />
+function irALogin() {
+    props.navigation.navigate('Login')
+}
 
-            <Pressable style={style.boton} onPress={onSubmit} >
-                <Text style={style.textoBoton}> Registrarme </Text>
-            </Pressable>
+return (
+    <View style={style.container}>
+        <Text style={style.registro}> Registro</Text>
+        <TextInput style={style.texto}
+            keyboardType='phone-pad'
+            placeholder='Usuario'
+            onChangeText={text => setUsuario(text)}
+            value={usuario}
+        />
+        <TextInput style={style.texto}
+            keyboardType='email-adress'
+            placeholder='Email'
+            onChangeText={text => setEmail(text)}
+            value={email}
+        />
+        <TextInput style={style.texto}
+            keyboardType='phone-pad'
+            placeholder='password'
+            secureTextEntry={true}
+            onChangeText={text => setPassword(text)}
+            value={password}
+        />
 
-            {registroError !== "" ? <Text style={style.errorRegistro}>{registroError}</Text> : null}
+        <Pressable style={style.boton} onPress={onSubmit} >
+            <Text style={style.textoBoton}> Registrarme </Text>
+        </Pressable>
 
-            <Pressable  onPress={irALogin}>
-                <Text style={style.irALogin} >
-                    Ir a Login
-                </Text>
-            </Pressable>
+        {errorFirebase !== "" ? <Text style={style.errorRegistro}>{errorFirebase}</Text> : null}
 
-            <Pressable onPress={() => props.navigation.navigate('Homepage')} >
-                <Text>
-                    Ir a home page
+        <Pressable onPress={irALogin}>
+            <Text style={style.irALogin} >
+                Ir a Login
+            </Text>
+        </Pressable>
 
-                </Text>
-            </Pressable>
 
-            <Pressable onPress={() => props.navigation.navigate('HomeMenu')} >
-                <Text>
-                    Ir a home menu
 
-                </Text>
+        <Pressable onPress={() => props.navigation.navigate('HomeMenu')} >
+            <Text>
+                Ir a home menu
 
-            </Pressable>
+            </Text>
 
-        </View>
+        </Pressable>
 
-    )
+    </View>
+
+)
 }
 
 
@@ -141,22 +136,22 @@ const style = StyleSheet.create({
     },
 
     irALogin: {
-    textAlign: "center",
-    fontWeight: "bold",
-    fontSize: 12,
-    textDecorationLine: "underline",
-    marginTop: 20,
-},
+        textAlign: "center",
+        fontWeight: "bold",
+        fontSize: 12,
+        textDecorationLine: "underline",
+        marginTop: 20,
+    },
 
-registro: {
-    textAlign: "center",
-    fontWeight: "bold",
-    fontSize: 30,
-    marginBottom: 20,
+    registro: {
+        textAlign: "center",
+        fontWeight: "bold",
+        fontSize: 30,
+        marginBottom: 20,
 
 
 
-}
+    }
 
 })
 

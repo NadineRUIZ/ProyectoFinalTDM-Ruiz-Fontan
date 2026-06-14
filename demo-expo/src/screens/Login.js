@@ -17,7 +17,7 @@ function Login(props){
             auth.signInWithEmailAndPassword(email, password)
             .then((response) => {
                 setLogin(true);
-                props.navigation.navigate("Homepage");
+                props.navigation.navigate("HomeMenu");
             })
             .catch(error => {
                 setLoginError("credenciales Invalidas")

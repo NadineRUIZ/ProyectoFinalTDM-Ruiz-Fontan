@@ -23,14 +23,14 @@ function crearPosts(props){
         })
         .then(() =>{
             console.log("Post publicado");
+            console.log(props.posteo.data.likes)
         })
         .catch(e => console.log(e))
 
     };
-       
-}
 
-return(
+
+    return(
     <View style= {Styles.contenedor}>
         <Text style= {styles.title}> Crear posteo </Text>
 
@@ -45,5 +45,9 @@ return(
 
     </View>
 )
+       
+}
+
+
 
 export default crearPosts;

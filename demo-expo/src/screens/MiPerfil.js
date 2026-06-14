@@ -8,53 +8,54 @@ import { View, Text, Pressable } from "react-native-web";
 
 function MiPerfil(props) {
 
-    const [dataUsuario, setDataUsuario] = useState("")
+    const [dataUsuario, setDataUsuario] = useState([])
     const [posteos, setPosteos] = useState("")
 
-    function logout() {
+   function logout() {
+  auth.signOut()
+    .then(() => {
+      props.navigation.navigate("Login");
+    });
+}
 
-        auth.singout()
-        props.navigation.navigate("Login")
-    }
 
-
-    useEffect(() => {
+   useEffect(() => {
         db.collection('post')
-            .where('email', '==', 'auth.currentUser.email')
+          .where('email', '==', 'auth.currentUser.email')
             .onSnapshot(
                 docs => {
-                    let post = [];
+                  let post = [];
                     docs.forEach(doc => {
 
                         if (doc.data().description !== "") {
-                            post.push({
-                                id: doc.id,
-                                data: doc.data()
-                            })
+                         post.push({
+                               id: doc.id,
+                            data: doc.data()
+                           })
 
-                        }
+                      }
 
 
                         setPosteos(posts)
-                    })
+                 })
 
 
                 }
             )
 
 
-    })
+ })
 
     useEffect(() => {
-        auth.onAuthStateChanged(user => {
+        auth.onAuthStateChanged(usuario => {
 
-            if (user == "")
+            if (usuario == null)
                 return;
 
             else (
 
                 db.collection('users')
-                    .where("email", "==", (auth.currentUser.email))
+                    .where("email", "==", (usuario.email))
                     .onSnapshot(
                         docs => {
                             let users = [];
@@ -64,7 +65,7 @@ function MiPerfil(props) {
                                     data: doc.data()
 
                                 })
-                                SetDataUsuario(users)
+                                setDataUsuario(users)
 
                             })
                         }
@@ -78,23 +79,20 @@ function MiPerfil(props) {
     return (
         <View
             style={style.container}>
-            <Text style={style.datos}>
-                {dataUsuario.length === 0 ? "Cargando" : `Usuario: ${dataUsuario[0]?.data?.usuario}`}
+            <Text>
+                {dataUsuario.length === 0 ? "Cargando" : <Text style={style.usuario}> {dataUsuario[0].data.usuario}</Text>}
             </Text>
 
             <Text style={style.datos}>
-                {dataUsuario.length === 0 ? "" : `Email: ${dataUsuario[0]?.data?.email}`}
+                {dataUsuario.length === 0 ? "" : <Text style={style.email}>{dataUsuario[0].data.email}</Text>}
             </Text>
-            <Text>Mis posteos</Text>
-            {posteos == "" ? <Text>No hay posteos</Text> :
+
+            <Pressable onPress={logout}>
+                <Text>Cerrar Sesion</Text>
+            </Pressable>
+
+            
              
-             <FlatList
-                    data={posteos}
-                    keyExtractor={post => post.id.toString()}
-                    renderItem={({ item }) => <Text>{item.description}</Text>} //chequear .descripcion de NewPost
-
-                />
-            }
 
 
         </View>

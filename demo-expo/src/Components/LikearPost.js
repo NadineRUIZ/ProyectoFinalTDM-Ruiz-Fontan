@@ -2,37 +2,51 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { useState } from "react";
 import { View, Pressable, Text } from "react-native-web";
+import { auth, db} from "../firebase/config";
 
-function LikearPost() {
+function LikearPost(props) {
     const [likes, setLikes] = useState(0)
 
 
     function darLike() {
-        setLikes(likes + 1)
+
+        if (posteo.data.likes.includes(auth.currentUser.email)) {
+            let nuevosLikes = props.posteo.data.likes.filter(email => email !== auth.currentUser.email)
+
+            db.collection("posts")
+                .doc(props.posteo.id).
+                update({
+                    likes: nuevosLikes
+                });
+        } else {
+            props.posteo.data.likes.push(emailUsuario);
+
+            db.collection("posts").doc(props.posteo.id).update({
+                likes: props.posteo.data.likes
+            });
+
+        }
+
+
+        return (
+            <View>
+                <Text style={style.corazon}>
+                    ❤️
+                    <Text style={style.cantLikes}>
+                        {props.posteo.data.likes.length}
+                    </Text>
+                </Text>
+
+                <Pressable onPress={darLike} style={style.botonLike}>
+                    <Text style={style.meGusta}>
+                        {props.posteo.data.likes.includes(auth.currentUser.email) ? "Quitar me gusta" : "Me gusta"}
+                    </Text>
+                </Pressable>
+            </View>
+        )
 
     }
 
-    // Cada posteo tiene un campo "likes" que es un array de emails. cuando el usuario toca "Me Gusta" pregunto: 
-    // if (posteo.likes.includes(userEmail)) {
-    // dislike = quitar like
-    //} else {
-    // like = agregar like
-    // }
-    //};
-
-    // si no esta en el array, le das like arrayUnion(auth.currentUser.email)
-    // si ay esta en el array, le quia=to el like arrayRemove(auth.currentUser.email)
-
-    return (
-        <View>
-            <Text style={style.corazon}>❤️<Text style={style.cantLikes}>{likes}</Text></Text>
-            <Pressable onPress={darLike} style={style.botonLike}>
-                <Text style={style.meGusta}>Me gusta</Text>
-                <Text></Text>
-            </Pressable>
-        </View>
-
-    )
 }
 
 const style = StyleSheet.create({
