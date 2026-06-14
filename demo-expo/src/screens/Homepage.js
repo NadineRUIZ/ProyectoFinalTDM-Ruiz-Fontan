@@ -1,42 +1,71 @@
 import React, {useEffect, useState} from "react";
-import {Text, View, Flatlist, ActiviyIndicator, StyleSheet } from "react-native";
-import {db, auth} from "../firebase/config"
+import {Text, View, FlatList, ActivityIndicator, StyleSheet } from "react-native";
+import {db, auth} from "../firebase/config";
+import PostCard from "../components/PostCard";
 
 
 function Homepage(props){
-const[post, setPost] = useState("")
+const[post, setPost] = useState([]);
+const[loading,setLoading] = useState(true);
 
-useEffect (() => {
+useEffect(() => {
     auth.onAuthStateChanged(usuario => {
-        if (usuario){
-            db.collection("post").orderBy("createdAt", "desc").add({
-                user: auth.currentUser.email, 
-                description: descripcion, 
-                createdAt: Date.now(),
-            })
-            .then()
-            .catch(e => console.log(e))
-        } else {
+        if(!usuario){
             props.navigation.navigate("Login");
+            return;
         }
-        setPost();
-    });
-}, []);
+        else{
+            db.collection("posts")
+                .orderBy("createdAt", "desc")
+                    .onSnapshot(docs => {
+                            let posts = [];
+                            docs.forEach(doc => {
+                                posts.push({
+                                    id:doc.id,
+                                    data:doc.data()
+                                });
+                            });
+                            setPost(posts);
+                            setLoading(false);
+                            });
+              
+        }
+                        
+                    })
+    }, []);
+
+
+        
 
     return(
+<<<<<<< HEAD
     <View style = {style.container}>
         <Text style= {style.title}> Home </Text>
     </View>
+=======
+        <View style = {styles.contenedor}>
+            <Text style= {styles.title}> Home </Text>
+            <FlatList 
+            data = {post}
+                keyExtractor={((item)=> item.id.toString())}
+                renderItem={item => 
+                <PostCard 
+                    post = {item}/>}   />
+        </View>
+>>>>>>> 27ce881631695653ae7a031c61470e76d65ccd45
     )
-    }
+}
 
- const style = StyleSheet.create({
-  container: {
-  
+ const styles = StyleSheet.create({
+  contenedor: {
+    flex:1,
+
+  },
+  title: {
+    fontSize: 24,
   }
 });
 
 
 export default Homepage;
-
 

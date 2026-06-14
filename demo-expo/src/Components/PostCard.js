@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Text, View, Flatlist, ActiviyIndicator, StyleSheet, Pressable } from "react-native";
+import {Text, View, Flatlist, StyleSheet, Pressable } from "react-native";
 import {db, auth} from "../firebase/config"
 import { TextInput } from "react-native-web";
 
