@@ -1,7 +1,7 @@
 import React from "react";
 import Homepage from "../screens/Homepage";
 import MiPerfil from "../screens/MiPerfil";
-import crearPosts from "../components/PostCard";
+import crearPosts from "../components/CrearPost";
 import Comentarios from "../screens/Comentarios"
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";

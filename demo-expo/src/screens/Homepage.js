@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Text, View, FlatList, ActivityIndicator, StyleSheet } from "react-native";
 import {db, auth} from "../firebase/config";
-import PostCard from "../components/PostCard";
+import PostCard from "../screens/PostCard";
 
 
 function Homepage(props){
@@ -40,17 +40,21 @@ useEffect(() => {
         
 
     return(
-        <View style = {styles.contenedor}>
-            <Text style= {styles.title}> Home </Text>
-            <FlatList 
-            data = {post}
-                keyExtractor={((item)=> item.id.toString())}
-                renderItem={item => 
-                <PostCard 
-                    post = {item}/>} 
-                    navegar = {props.navigation}  />
+        <View> 
+        <Text style = {styles.title}> Home </Text>
+        <FlatList 
+            data = {post} 
+            keyExtractor={(item) => item.id.toString()}
+            renderItem = {({item}) => (
+                <PostCard
+                    post={item}
+                    navegar={props.navigation} />
+            )}/>
+        
         </View>
     )
+
+    
 }
 
  const styles = StyleSheet.create({

@@ -19,7 +19,7 @@ function crearPosts(props){
             user: auth.currentUser.email, 
             description: descripcion, 
             likes: [],
-            createdAt: Date.now(),
+            createdAt: Date.now().toLocaleString(),
         })
         .then(() =>{
             console.log("Post publicado");
