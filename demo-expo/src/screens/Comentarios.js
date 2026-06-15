@@ -9,16 +9,17 @@ function Comentarios(props){
     useEffect(() => {
         db.collection("comentarios").onSnapshot( docs =>{
 
-            let arrayComentarios = [];
+        let arrayComentarios = [];
 
             docs.forEach (doc => {
                 arrayComentarios.push({
                     id: doc.id,
                     datos: doc.data()
                 });
-            })
+            });
+             setComentarios(arrayComentarios)
         });
-        setComentarios(arrayComentarios)
+    
     }, []);
 
 
@@ -52,17 +53,17 @@ function Comentarios(props){
             </View>)}
         />
 
-        <Text> comentar post: </Text>
+        <Text style = {styles.textoBoton}> comentar post: </Text>
         <TextInput 
-            style = {styles.input}
+             keyboardType= "default"
             placeholder=" escribi tu comentario ...."
             value={comentario}
-            onChange={(text)=> setComentario(text)}
+            onChangeText={(text)=> setComentario(text)}
 
         />
 
         <Pressable style= {styles.boton} onPress={() => agregarComentario()}>
-            <Text> Publica tu comentario! </Text>
+            <Text style= {styles.textoBotonPublica}> Publica tu comentario! </Text>
 
         </Pressable>
 
@@ -70,7 +71,35 @@ function Comentarios(props){
         </View>
     )
 
-    // FALTA HACER EL CSS 
+   
 }
+const styles = StyleSheet.create({
+    contenedor: {
+        flex: 1,
+        justifyContent: "center",
+        padding: 20,
+        margin: 200,
+    },
+    boton: {
+            backgroundColor: '#5f0082',
+            paddingHorizontal: 10,
+            paddingVertical: 6,
+            textAlign: 'center',
+            borderRadius: 4,
+            borderWidth: 1,
+            borderStyle: 'solid',
+            borderColor: '#8d56c2fc',
+        },
+
+        textoBoton: {
+            color: '#fff',
+            textAlign: "center",
+    
+        },
+        textoBotonPublica: {
+            color: "white",
+        }
+    });
+
 
 export default Comentarios;

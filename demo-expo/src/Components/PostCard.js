@@ -23,7 +23,7 @@ function crearPosts(props){
         })
         .then(() =>{
             console.log("Post publicado");
-            console.log(props.posteo.data.likes)
+           
         })
         .catch(e => console.log(e))
 
@@ -31,7 +31,7 @@ function crearPosts(props){
 
 
     return(
-    <View style= {Styles.contenedor}>
+    <View style= {styles.contenedor}>
         <Text style= {styles.title}> Crear posteo </Text>
 
          <TextInput style={styles.field}
@@ -45,8 +45,40 @@ function crearPosts(props){
 
     </View>
 )
-       
+
+
 }
+const styles = StyleSheet.create({
+    contenedor: {
+        flex: 1,
+        justifyContent: "center",
+        padding: 20,
+        margin: 200,
+    },
+    title: {
+        textAlign: "center",
+        fontWeight: "bold",
+        fontSize: 30,
+        marginBottom: 20,
+    },
+    boton: {
+            backgroundColor: '#5f0082',
+            paddingHorizontal: 10,
+            paddingVertical: 6,
+            textAlign: 'center',
+            borderRadius: 4,
+            borderWidth: 1,
+            borderStyle: 'solid',
+            borderColor: '#8d56c2fc',
+        },
+
+        textoBoton: {
+            color: '#fff',
+            textAlign: "center",
+    
+        },
+    
+    });
 
 
 
