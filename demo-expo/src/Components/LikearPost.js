@@ -3,15 +3,18 @@ import { StyleSheet } from "react-native";
 import { useState } from "react";
 import { View, Pressable, Text } from "react-native-web";
 import { auth, db } from "../firebase/config";
+import firebase from 'firebase';
+
 
 function LikearPost(props) {
-    const [likes, setLikes] = useState(0)
+  
 
-    const id = props.item.id;
-    const likes = props.item.data.likes;
-    const email = auth.currentUser.email;
 
     function darLike() {
+
+    const id = props.post.id;
+    const likes = props.post.data.likes;
+    const email = auth.currentUser.email;
         if (likes.includes(email)) {
             db.collection('posts')
                 .doc(id)
@@ -19,7 +22,7 @@ function LikearPost(props) {
                     likes: firebase.firestore.FieldValue.arrayRemove(email)
                 })
 
-                .then(( => { }))
+                .then(() => { })
                 .catch(e => console.log(e))
         } else {
             db.collection('posts')
@@ -38,7 +41,7 @@ function LikearPost(props) {
         <Text style={style.corazon}>
             ❤️
             <Text style={style.cantLikes}>
-                {props.posteo.data.likes.length}
+                {props.post.data.likes.length}
             </Text>
         </Text>
         <Pressable onPress={darLike}>
