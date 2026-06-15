@@ -38,11 +38,6 @@ useEffect(() => {
         
 
     return(
-<<<<<<< HEAD
-    <View style = {style.container}>
-        <Text style= {style.title}> Home </Text>
-    </View>
-=======
         <View style = {styles.contenedor}>
             <Text style= {styles.title}> Home </Text>
             <FlatList 
@@ -52,7 +47,6 @@ useEffect(() => {
                 <PostCard 
                     post = {item}/>}   />
         </View>
->>>>>>> 27ce881631695653ae7a031c61470e76d65ccd45
     )
 }
 

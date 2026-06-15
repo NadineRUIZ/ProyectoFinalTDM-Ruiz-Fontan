@@ -2,70 +2,62 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { useState } from "react";
 import { View, Pressable, Text } from "react-native-web";
-import { auth, db} from "../firebase/config";
+import { auth, db } from "../firebase/config";
 
 function LikearPost(props) {
     const [likes, setLikes] = useState(0)
 
+    const id = props.item.id;
+    const likes = props.item.data.likes;
+    const email = auth.currentUser.email;
 
     function darLike() {
+        if (likes.includes(email)) {
+            db.collection('posts')
+                .doc(id)
+                .update({
+                    likes: firebase.firestore.FieldValue.arrayRemove(email)
+                })
 
-        if (posteo.data.likes.includes(auth.currentUser.email)) {
-            let nuevosLikes = props.posteo.data.likes.filter(email => email !== auth.currentUser.email)
-
-            db.collection("posts")
-                .doc(props.posteo.id).
-                update({
-                    likes: nuevosLikes
-                });
+                .then(( => { }))
+                .catch(e => console.log(e))
         } else {
-            props.posteo.data.likes.push(emailUsuario);
-
-            db.collection("posts").doc(props.posteo.id).update({
-                likes: props.posteo.data.likes
-            });
-
+            db.collection('posts')
+                .doc(id)
+                .update({
+                    likes: firebase.firestore.FieldValue.arrayUnion(email)
+                })
+                .then(() => { })
+                .catch(e => console.log(e))
         }
-
-
-        return (
-            <View>
-                <Text style={style.corazon}>
-                    ❤️
-                    <Text style={style.cantLikes}>
-                        {props.posteo.data.likes.length}
-                    </Text>
-                </Text>
-
-                <Pressable onPress={darLike} style={style.botonLike}>
-                    <Text style={style.meGusta}>
-                        {props.posteo.data.likes.includes(auth.currentUser.email) ? "Quitar me gusta" : "Me gusta"}
-                    </Text>
-                </Pressable>
-            </View>
-        )
-
     }
+
+
+    return (
+    <View>
+        <Text style={style.corazon}>
+            ❤️
+            <Text style={style.cantLikes}>
+                {props.posteo.data.likes.length}
+            </Text>
+        </Text>
+        <Pressable onPress={darLike}>
+            <Text>{likes.includes(email) ? "Quitar like" : "Me gusta"}</Text>
+        </Pressable>
+
+    </View>
+)
+
 
 }
 
-const style = StyleSheet.create({
-    corazon: {
 
-    },
 
-    botonLike: {
 
-    },
 
-    meGusta: {
 
-    },
 
-    cantLikes: {
 
-    },
-})
 
 
 export default LikearPost;
