@@ -3,21 +3,18 @@ import {View, Text, StyleSheet, Pressable} from "react-native";
 import LikearPost from "../components/LikearPost";
 
 
-
-function PostCard(props){
-
-    return(
-        <View style= {styles.cartaContenedora}>
-            <Text style = {styles.usuario}> {props.post.data.user}</Text>
-            <Text style = {styles.descripcion} > {props.post.data.description}</Text>
-            <Text> {props.post.data.createdAt}</Text>
-            <LikearPost style  = {styles.likes} post={props.post} />
-            
+function PostCard(props) {
+    return (
+        <View style={styles.cartaContenedora}>
+            <Text style={styles.usuario}> {props.post.data.user}</Text>
+            <Text style={styles.descripcion}> {props.post.data.description}</Text>
+            <Text>{new Date(props.post.data.createdAt).toLocaleString()}</Text>
+            <LikearPost style={styles.likes} post={props.post} />
+            <Pressable onPress={() => props.navegar.navigate("Comentarios", { postId: props.post.id })}>
+                <Text>Comentar</Text>
+            </Pressable>
         </View>
-
-
     );
-
 }
 
 const styles = StyleSheet.create({
