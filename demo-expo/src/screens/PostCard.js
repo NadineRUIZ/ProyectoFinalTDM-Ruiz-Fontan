@@ -1,5 +1,7 @@
 import React from "react";
 import {View, Text, StyleSheet} from "react-native";
+import LikearPost from "../components/LikearPost";
+
 
 
 function PostCard(props){
@@ -8,9 +10,8 @@ function PostCard(props){
         <View style= {styles.cartaContenedora}>
             <Text style = {styles.usuario}> {props.post.data.user}</Text>
             <Text style = {styles.descripcion} > {props.post.data.description}</Text>
-            <Text style  = {styles.likes} > {props.post.data.likes.length}</Text>
             <Text> {new Date (props.post.data.createdAt).toLocaleString()}</Text>
-            <LikearPost post={props.post} />
+            <LikearPost style  = {styles.likes} post={props.post} />
         </View>
 
 

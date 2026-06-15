@@ -1,20 +1,23 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+
 import { useState } from "react";
 import { View, Pressable, Text } from "react-native-web";
 import { auth, db } from "../firebase/config";
 import firebase from 'firebase';
+import { StyleSheet } from "react-native";
+
 
 
 function LikearPost(props) {
-  
 
-
-    function darLike() {
 
     const id = props.post.id;
     const likes = props.post.data.likes;
     const email = auth.currentUser.email;
+    
+    function darLike() {
+
+
         if (likes.includes(email)) {
             db.collection('posts')
                 .doc(id)
@@ -37,22 +40,27 @@ function LikearPost(props) {
 
 
     return (
-    <View>
-        <Text style={style.corazon}>
-            ❤️
-            <Text style={style.cantLikes}>
-                {props.post.data.likes.length}
+        <View>
+            <Text style={style.corazon}>
+                ❤️
+                <Text style={style.cantLikes}>
+                    {props.post.data.likes.length}
+                </Text>
             </Text>
-        </Text>
-        <Pressable onPress={darLike}>
-            <Text>{likes.includes(email) ? "Quitar like" : "Me gusta"}</Text>
-        </Pressable>
+            <Pressable onPress={darLike}>
+                <Text>{likes.includes(email) ? "Quitar like" : "Me gusta"}</Text>
+            </Pressable>
 
-    </View>
-)
-
-
+        </View>
+    )
 }
+
+const style = StyleSheet.create({
+    corazon: {
+
+    }
+})
+
 
 
 
