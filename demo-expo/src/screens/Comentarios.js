@@ -25,6 +25,7 @@ function Comentarios(props){
 
     function agregarComentario() {
         db.collection("comentarios").add({
+            postId: props.route.params.id,
             email: auth.currentUser.email,
             textoComentario: comentario, 
             createdAt: Date.now()

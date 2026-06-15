@@ -19,7 +19,7 @@ function crearPosts(props){
             user: auth.currentUser.email, 
             description: descripcion, 
             likes: [],
-            createdAt: Date.now().toLocaleString(),
+            createdAt: Date.now(),
         })
         .then(() =>{
             console.log("Post publicado");
@@ -40,6 +40,7 @@ function crearPosts(props){
                         onChangeText={text => setDescripcion(text)}
                         value={descripcion} />
         <Pressable style = {styles.boton}  onPress={() => publicarPost()}>
+            
         <Text style={styles.textoBoton}> Publicar!</Text>
         </Pressable>
 
