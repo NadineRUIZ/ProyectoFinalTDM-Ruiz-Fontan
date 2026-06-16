@@ -23,6 +23,7 @@ function CrearPosts(props){
         })
         .then(() =>{
             console.log("Post publicado");
+            props.navigation.navigate ("Home");
            
         })
         .catch(e => console.log(e))
