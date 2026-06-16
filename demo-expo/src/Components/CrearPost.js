@@ -54,8 +54,10 @@ const styles = StyleSheet.create({
     contenedor: {
         flex: 1,
         justifyContent: "center",
-        padding: 20,
+        padding: 50,
         margin: 200,
+        width: "100%",
+        alignSelf: "center",
     },
     title: {
         textAlign: "center",

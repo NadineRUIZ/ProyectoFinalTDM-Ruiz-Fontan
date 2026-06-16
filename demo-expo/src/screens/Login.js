@@ -64,7 +64,9 @@ const style = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         padding: 20,
-        margin: 200
+        margin: 200,
+        width: "100%",
+        alignSelf: "center",
 
     },
 

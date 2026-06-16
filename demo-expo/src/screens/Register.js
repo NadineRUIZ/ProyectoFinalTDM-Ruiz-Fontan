@@ -89,7 +89,12 @@ return (
 
 const style = StyleSheet.create({
     container: {
-        margin: 200
+        flex: 1,
+        justifyContent: "center",
+        padding: 20,
+        margin: 200,
+        width: "100%",
+        alignSelf: "center",
     },
 
     texto: {
