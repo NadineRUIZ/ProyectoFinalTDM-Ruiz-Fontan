@@ -41,26 +41,29 @@ function Comentarios(props) {
 
     return (
         <View style={styles.contenedor}>
-            <Text> comentarios </Text>
+            <Text style={styles.titulo}> comentarios </Text>
 
             <FlatList
 
                 data={comentarios}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) =>
-                (<View>
+                (<View style={styles.comentarioCard}>
                     <Text style={styles.email}> {item.datos.email}</Text>
                     <Text style={styles.coment}> {item.datos.textoComentario}</Text>
-                    <Text> {item.datos.createdAt}</Text>
+                    <Text style={styles.fecha}> {new Date(item.datos.createdAt).toLocaleString()}</Text>
                 </View>)}
             />
 
-        <Text style = {styles.textBoton}> comentar post: </Text>
-        <TextInput 
-             keyboardType= "default"
-            placeholder=" escribi tu comentario ...."
-            value={comentario}
-            onChangeText={(text)=> setComentario(text)}
+            <Text style={styles.textBoton}> comentar post: </Text>
+            <TextInput
+
+                style={styles.comentario}
+
+                keyboardType="default"
+                placeholder=" escribi tu comentario ...."
+                value={comentario}
+                onChangeText={(text) => setComentario(text)}
 
             />
 
@@ -75,12 +78,21 @@ function Comentarios(props) {
 
 
 }
+
 const styles = StyleSheet.create({
+
+    titulo: {
+        fontSize: 28,
+    fontWeight: "bold",
+    marginBottom: 16,
+    color: "#333",
+
+    },
     contenedor: {
         flex: 1,
         justifyContent: "center",
         padding: 20,
-        margin: 200,
+        marginBottom: 12,
     },
     boton: {
         backgroundColor: '#5f0082',
@@ -93,15 +105,56 @@ const styles = StyleSheet.create({
         borderColor: '#8d56c2fc',
     },
 
-        textBoton: {
-            color: "black",
-            textAlign: "center",
-    
-        },
-        textoBotonPublica: {
-            color: "white",
-        }
-    });
+    textBoton: {
+        color: "black",
+        textAlign: "center",
+
+    },
+    textoBotonPublica: {
+        color: "white",
+    },
+
+    comentario: {
+        backgroundColor: "#ffffff",
+        borderRadius: 8,
+        padding: 12,
+        marginBottom: 10,
+        borderWidth: 1,
+        borderColor: "#d99ffc",
+    },
+
+    email: {
+        fontWeight: "bold",
+        color: "#8e24aa",
+        marginBottom: 4,
+
+    },
+
+    comentarioCard: {
+        backgroundColor: "#ffffff",
+        borderRadius: 8,
+        padding: 12,
+        marginBottom: 10,
+        borderWidth: 1,
+        borderColor: "#d99ffc",
+
+    },
+
+    coment: {
+        fontSize: 15,
+        color: "#333",
+        marginBottom: 4,
+    },
+
+    fecha: {
+        fontSize: 11,
+        color: "#999",
+
+    }
+
+
+
+});
 
 
 export default Comentarios;
