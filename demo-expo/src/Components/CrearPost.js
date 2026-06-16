@@ -23,6 +23,7 @@ function CrearPosts(props){
         })
         .then(() =>{
             console.log("Post publicado");
+            props.navigation.navigate ("Home");
            
         })
         .catch(e => console.log(e))
@@ -61,6 +62,12 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 30,
         marginBottom: 20,
+    },
+    field:{
+        height:100,
+        backgroundColor:"rgba(95, 0, 130, 0.4)",
+        borderRadius:5,
+        textAlign: "center",
     },
     boton: {
             backgroundColor: '#5f0082',

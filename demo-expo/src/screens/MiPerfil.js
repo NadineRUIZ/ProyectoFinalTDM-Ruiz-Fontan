@@ -27,33 +27,33 @@ function MiPerfil(props) {
             if (usuario == null)
                 return;
 
-
-            db.collection('posts')
-                .where('user', '==', auth.currentUser.email)
+            
+             db.collection('posts')
+            .where('user', '==', auth.currentUser.email)
+            .orderBy("createdAt", "desc")
                 .onSnapshot(
                     docs => {
                         let post = [];
                         docs.forEach(doc => {
-                            post.push({
-                                id: doc.id,
-                                data: doc.data()
-                            })
+                                    post.push({
+                                    id: doc.id,
+                                    data: doc.data()
+                                });
 
-
+                            
                             setPosteos(post)
 
-                        })
+                        });
 
 
-                    }
-                )
+                    });
 
 
-        })
+    });
 
-
-    })
-
+        
+ }, []);
+        
 
 
 
@@ -68,6 +68,7 @@ function MiPerfil(props) {
 
                 db.collection('users')
                     .where("email", "==", (usuario.email))
+                    
                     .onSnapshot(
                         docs => {
                             let users = [];
@@ -85,7 +86,7 @@ function MiPerfil(props) {
             )
 
         })
-    })
+    }, []);
 
     if (loading) {
         return <ActivityIndicator size="large" color="violet" />;

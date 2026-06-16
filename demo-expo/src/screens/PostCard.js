@@ -54,8 +54,8 @@ const styles = StyleSheet.create({
     boton:{
         borderRadius: 10,
         borderWidth: 1,
-        borderColor: "black",
-        backgroundColor: "#77D7E4",
+        borderColor: "grey",
+        backgroundColor: "#rgba(95, 0, 130, 0.4)",
         gap: 6,
         width:100,
         textAlign:"center",
