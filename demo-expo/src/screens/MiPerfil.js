@@ -30,29 +30,29 @@ function MiPerfil(props) {
             
              db.collection('posts')
             .where('user', '==', auth.currentUser.email)
-            .onSnapshot(
-                docs => {
-                    let post = [];
-                    docs.forEach(doc => {
-                                post.push({
-                                id: doc.id,
-                                data: doc.data()
-                            })
+            .orderBy("createdAt", "desc")
+                .onSnapshot(
+                    docs => {
+                        let post = [];
+                        docs.forEach(doc => {
+                                    post.push({
+                                    id: doc.id,
+                                    data: doc.data()
+                                });
 
-                        
-                        setPosteos(post)
+                            
+                            setPosteos(post)
 
-                    })
-
-
-                }
-            )
+                        });
 
 
-    })
+                    });
+
+
+    });
 
         
-        })
+ }, []);
         
 
        
@@ -68,6 +68,7 @@ function MiPerfil(props) {
 
                 db.collection('users')
                     .where("email", "==", (usuario.email))
+                    
                     .onSnapshot(
                         docs => {
                             let users = [];
@@ -85,7 +86,7 @@ function MiPerfil(props) {
             )
 
         })
-    })
+    }, []);
 
     if (loading) {
         return <ActivityIndicator size="large" color="violet" />;

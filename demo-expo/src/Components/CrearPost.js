@@ -63,6 +63,12 @@ const styles = StyleSheet.create({
         fontSize: 30,
         marginBottom: 20,
     },
+    field:{
+        height:100,
+        backgroundColor:"rgba(95, 0, 130, 0.4)",
+        borderRadius:5,
+        textAlign: "center",
+    },
     boton: {
             backgroundColor: '#5f0082',
             paddingHorizontal: 10,
