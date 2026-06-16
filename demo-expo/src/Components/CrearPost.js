@@ -3,7 +3,7 @@ import {Text, View, Flatlist, StyleSheet, Pressable } from "react-native";
 import {db, auth} from "../firebase/config"
 import { TextInput } from "react-native-web";
 
-function crearPosts(props){
+function CrearPosts(props){
     const [descripcion, setDescripcion] = useState("")
 
     useEffect(() => {
@@ -83,4 +83,4 @@ const styles = StyleSheet.create({
 
 
 
-export default crearPosts;
+export default CrearPosts;

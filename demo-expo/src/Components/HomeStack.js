@@ -16,7 +16,7 @@ function HomeStack() {
       <Stack.Screen 
         name="Comentarios" 
         component={Comentarios} 
-        options = {{headerShown: false}}
+       
       />
     </Stack.Navigator>
   );

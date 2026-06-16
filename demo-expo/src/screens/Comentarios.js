@@ -55,12 +55,12 @@ function Comentarios(props) {
                 </View>)}
             />
 
-            <Text style={styles.textoBoton}> comentar post: </Text>
-            <TextInput
-                keyboardType="default"
-                placeholder=" escribi tu comentario ...."
-                value={comentario}
-                onChangeText={(text) => setComentario(text)}
+        <Text style = {styles.textBoton}> comentar post: </Text>
+        <TextInput 
+             keyboardType= "default"
+            placeholder=" escribi tu comentario ...."
+            value={comentario}
+            onChangeText={(text)=> setComentario(text)}
 
             />
 
@@ -93,27 +93,15 @@ const styles = StyleSheet.create({
         borderColor: '#8d56c2fc',
     },
 
-    textoBoton: {
-        color: '#fff',
-        textAlign: "center",
-
-    },
-    textoBotonPublica: {
-        color: "white",
-    },
-
-    coment: {
-        fontSize: 15,
-        color: "#333",
-
-    },
-
-    email: {
-        fontWeight: "bold",
-        color: "#8e24aa",
-        marginBottom: 4,
-    }
-});
+        textBoton: {
+            color: "black",
+            textAlign: "center",
+    
+        },
+        textoBotonPublica: {
+            color: "white",
+        }
+    });
 
 
 export default Comentarios;

@@ -43,7 +43,7 @@ useEffect(() => {
         
 
     return(
-        <View> 
+        <View style = {styles.contenedor} > 
         <Text style = {styles.title}> Home </Text>
         <FlatList style={styles.flatlist}
             data = {post} 
@@ -63,6 +63,12 @@ useEffect(() => {
  const styles = StyleSheet.create({
   contenedor: {
     flex:1,
+    justifyContent: "space-around",
+    
+
+   
+   
+    
 
   },
   title: {

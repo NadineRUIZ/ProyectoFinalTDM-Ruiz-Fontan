@@ -81,16 +81,6 @@ return (
             </Text>
         </Pressable>
 
-
-
-        <Pressable onPress={() => props.navigation.navigate('HomeMenu')} >
-            <Text>
-                Ir a home menu
-
-            </Text>
-
-        </Pressable>
-
     </View>
 
 )

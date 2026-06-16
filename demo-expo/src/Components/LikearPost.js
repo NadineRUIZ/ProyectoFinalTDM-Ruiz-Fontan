@@ -9,14 +9,14 @@ import { StyleSheet } from "react-native";
 
 
 function LikearPost(props) {
-
-
+    
     const id = props.post.id;
     const likes = props.post.data.likes;
-    const email = auth.currentUser.email;
-    
-    function darLike() {
+    const email = auth.currentUser ? auth.currentUser.email : null;
 
+
+    function darLike() {
+        if (!email) return;
 
         if (likes.includes(email)) {
             db.collection('posts')
@@ -24,7 +24,6 @@ function LikearPost(props) {
                 .update({
                     likes: firebase.firestore.FieldValue.arrayRemove(email)
                 })
-
                 .then(() => { })
                 .catch(e => console.log(e))
         } else {
@@ -57,7 +56,7 @@ function LikearPost(props) {
 
 const style = StyleSheet.create({
     corazon: {
-        
+
 
     }
 })
