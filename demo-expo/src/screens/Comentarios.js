@@ -8,18 +8,19 @@ function Comentarios(props) {
 
     useEffect(() => {
         db.collection("comentarios")
-            .onSnapshot(docs => {
+        .orderBy("createdAt", "desc")
+                .onSnapshot(docs => {
 
-                let arrayComentarios = [];
+                    let arrayComentarios = [];
 
-                docs.forEach(doc => {
-                    arrayComentarios.push({
-                        id: doc.id,
-                        datos: doc.data()
+                    docs.forEach(doc => {
+                        arrayComentarios.push({
+                            id: doc.id,
+                            datos: doc.data()
+                        });
                     });
+                    setComentarios(arrayComentarios)
                 });
-                setComentarios(arrayComentarios)
-            });
 
     }, []);
 
@@ -56,7 +57,7 @@ function Comentarios(props) {
             />
 
         <Text style = {styles.textBoton}> comentar post: </Text>
-        <TextInput 
+        <TextInput
              keyboardType= "default"
             placeholder=" escribi tu comentario ...."
             value={comentario}

@@ -144,14 +144,14 @@ const style = StyleSheet.create({
     },
     email: {
         fontSize: 18,
-        color: "gray",
+        color: "#8d56c2fc",
         marginTop: 8,
         marginLeft: 10,
         marginBottom: 20,
     },
 
     botonLogout: {
-        backgroundColor: "#6200ea",
+        backgroundColor: "#8d56c2fc",
         paddingHorizontal: 12,
         paddingVertical: 6,
         borderRadius: 8,
