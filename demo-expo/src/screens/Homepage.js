@@ -6,7 +6,7 @@ import PostCard from "../screens/PostCard";
 
 function Homepage(props){
 const[post, setPost] = useState([]);
-const[loading,setLoading] = useState(true);
+const[loading, setLoading] = useState(true);
 
 useEffect(() => {
     auth.onAuthStateChanged(usuario => {

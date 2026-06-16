@@ -7,7 +7,8 @@ function Comentarios(props){
     const[comentario, setComentario] = useState("")
 
     useEffect(() => {
-        db.collection("comentarios").onSnapshot( docs =>{
+        db.collection("comentarios")
+        .onSnapshot( docs =>{
 
         let arrayComentarios = [];
 
