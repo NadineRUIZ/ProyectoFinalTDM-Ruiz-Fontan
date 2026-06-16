@@ -23,18 +23,17 @@ function PostCard(props) {
 const styles = StyleSheet.create({
 
     cartaContenedora: {
-    
-        backgroundColor: "#C1E0F7",
         borderRadius: 12,
-        borderWidth: 3,
-        borderColor: "#A4DEF9",
-        paddingHorizontal: 16,
-        paddingVertical: 14,
-        marginBottom: 12,
-        
-        overflow: "hidden",
+        borderWidth: 1,
         gap: 10,
-        marginHorizontal: 10,
+        marginHorizontal: 60,
+        backgroundColor: "#ffffff",
+       
+        padding: 20,
+        marginBottom: 30,
+        marginTop: 10,
+    
+        borderColor: "#d99ffc",
 
    
     },
@@ -63,10 +62,11 @@ const styles = StyleSheet.create({
     },
     espacioimagen:{
         width: "100%",
-        height: 200,
+        height: 300,
         justifyContent: "center",
         alignItems: "center", 
-        backgroundColor: "white",
+        backgroundColor: "#rgba(95, 0, 130, 0.5)",
+        borderRadius: 10,
 
     }
 })
