@@ -57,6 +57,7 @@ function LikearPost(props) {
 
 const style = StyleSheet.create({
     corazon: {
+        
 
     }
 })

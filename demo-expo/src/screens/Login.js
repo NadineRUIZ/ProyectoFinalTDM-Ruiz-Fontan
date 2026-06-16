@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Pressable, Text, TextInput, StyleSheet, View } from "react-native";
+import { Pressable, Text, TextInput, StyleSheet, View, useEffect } from "react-native";
 import {db, auth} from "../firebase/config"; 
 
 function Login(props){
@@ -8,6 +8,7 @@ function Login(props){
     const [password, setPassword] = useState("")
     const[login, setLogin] = useState(false)
     const [errorLogin, setLoginError] = useState("")
+
 
     function onSubmit(){
         if (email === "" || password === "") {

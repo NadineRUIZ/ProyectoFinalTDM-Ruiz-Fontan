@@ -20,10 +20,13 @@ useEffect(() => {
                     .onSnapshot(docs => {
                             let posts = [];
                             docs.forEach(doc => {
+                                console.log("post:", doc.id, doc.data());
                                 posts.push({
+                                  
                                     id:doc.id,
                                     data:doc.data()
                                 });
+                                
                             });
                             setPost(posts);
                             setLoading(false);
@@ -42,7 +45,7 @@ useEffect(() => {
     return(
         <View> 
         <Text style = {styles.title}> Home </Text>
-        <FlatList 
+        <FlatList style={styles.flatlist}
             data = {post} 
             keyExtractor={(item) => item.id.toString()}
             renderItem = {({item}) => (
@@ -64,7 +67,7 @@ useEffect(() => {
   },
   title: {
     fontSize: 24,
-  }
+  },
 });
 
 

@@ -1,79 +1,79 @@
 import React, { useEffect, useState } from "react";
 import { Pressable, Text, TextInput, StyleSheet, View, FlatList, FlatListComponent } from "react-native";
-import {db, auth} from "../firebase/config"; 
+import { db, auth } from "../firebase/config";
 
-function Comentarios(props){
-    const[comentarios, setComentarios] = useState([])
-    const[comentario, setComentario] = useState("")
+function Comentarios(props) {
+    const [comentarios, setComentarios] = useState([])
+    const [comentario, setComentario] = useState("")
 
     useEffect(() => {
         db.collection("comentarios")
-        .onSnapshot( docs =>{
+            .onSnapshot(docs => {
 
-        let arrayComentarios = [];
+                let arrayComentarios = [];
 
-            docs.forEach (doc => {
-                arrayComentarios.push({
-                    id: doc.id,
-                    datos: doc.data()
+                docs.forEach(doc => {
+                    arrayComentarios.push({
+                        id: doc.id,
+                        datos: doc.data()
+                    });
                 });
+                setComentarios(arrayComentarios)
             });
-             setComentarios(arrayComentarios)
-        });
-    
+
     }, []);
 
 
     function agregarComentario() {
         db.collection("comentarios").add({
-            postId: props.route.params.id,
+            postId: props.route.params.postId,
             email: auth.currentUser.email,
-            textoComentario: comentario, 
+            textoComentario: comentario,
             createdAt: Date.now()
         })
-        .then(()=>  {
-            setComentario("");
-            props.navigation.navigate("Homepage")
-        })
-        .catch ( e => console.log(e));
+            .then(() => {
+                setComentario("");
+                props.navigation.navigate("Homepage")
+            })
+            .catch(e => console.log(e));
 
     }
 
-    return(
-        <View style= {styles.contenedor}> 
-        <Text> comentarios </Text>
+    return (
+        <View style={styles.contenedor}>
+            <Text> comentarios </Text>
 
-        <FlatList
+            <FlatList
 
-            data = {comentarios}
-            keyExtractor={(item)=> item.id }
-            renderItem={({item}) => 
-            (<View>
-              <Text> {item.datos.email}</Text>  
-              <Text> {item.datos.textoComentario}</Text>
-              <Text> {item.datos.createdAt}</Text>
-            </View>)}
-        />
+                data={comentarios}
+                keyExtractor={(item) => item.id}
+                renderItem={({ item }) =>
+                (<View>
+                    <Text style={styles.email}> {item.datos.email}</Text>
+                    <Text style={styles.coment}> {item.datos.textoComentario}</Text>
+                    <Text> {item.datos.createdAt}</Text>
+                </View>)}
+            />
 
-        <Text style = {styles.textoBoton}> comentar post: </Text>
-        <TextInput 
-             keyboardType= "default"
-            placeholder=" escribi tu comentario ...."
-            value={comentario}
-            onChangeText={(text)=> setComentario(text)}
+            <Text style={styles.textoBoton}> comentar post: </Text>
+            <TextInput
+                keyboardType="default"
+                placeholder=" escribi tu comentario ...."
+                value={comentario}
+                onChangeText={(text) => setComentario(text)}
 
-        />
+            />
 
-        <Pressable style= {styles.boton} onPress={() => agregarComentario()}>
-            <Text style= {styles.textoBotonPublica}> Publica tu comentario! </Text>
+            <Pressable style={styles.boton} onPress={() => agregarComentario()}>
+                <Text style={styles.textoBotonPublica}> Publica tu comentario! </Text>
 
-        </Pressable>
+            </Pressable>
 
-       
+
         </View>
     )
 
-   
+
 }
 const styles = StyleSheet.create({
     contenedor: {
@@ -83,25 +83,37 @@ const styles = StyleSheet.create({
         margin: 200,
     },
     boton: {
-            backgroundColor: '#5f0082',
-            paddingHorizontal: 10,
-            paddingVertical: 6,
-            textAlign: 'center',
-            borderRadius: 4,
-            borderWidth: 1,
-            borderStyle: 'solid',
-            borderColor: '#8d56c2fc',
-        },
+        backgroundColor: '#5f0082',
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: 'center',
+        borderRadius: 4,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: '#8d56c2fc',
+    },
 
-        textoBoton: {
-            color: '#fff',
-            textAlign: "center",
-    
-        },
-        textoBotonPublica: {
-            color: "white",
-        }
-    });
+    textoBoton: {
+        color: '#fff',
+        textAlign: "center",
+
+    },
+    textoBotonPublica: {
+        color: "white",
+    },
+
+    coment: {
+        fontSize: 15,
+        color: "#333",
+
+    },
+
+    email: {
+        fontWeight: "bold",
+        color: "#8e24aa",
+        marginBottom: 4,
+    }
+});
 
 
 export default Comentarios;
